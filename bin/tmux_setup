@@ -2,7 +2,9 @@
 #
 #
 THE_ARGS="$@"
-THIS_DIR="$(bash_setup dirname_of_bin "$0")"
+THIS_DIR="$(dirname "$(dirname "$(realpath "$0")")")"
+PATH="$PATH:$THIS_DIR/../mksh_setup/bin"
+PATH="$PATH:$THIS_DIR/../my_bash/bin"
 
 if [[ -z "$@" ]]; then
   action="watch"
@@ -55,7 +57,7 @@ case $action in
     ;;
 
   "install")
-    bash_setup make_link "$THIS_DIR/dots/.tmux.conf" "$HOME/.tmux.conf"
+    my_bash link "$THIS_DIR/dots/.tmux.conf" "$HOME/.tmux.conf"
     # === install
     ;;
 
